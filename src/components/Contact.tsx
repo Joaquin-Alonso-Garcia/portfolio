@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import type { FormEvent } from 'react';
 import supabase from '../lib/supabase';
 import type { ContactSubmission } from '../types';
 
 export const Contact = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [formData, setFormData] = useState<ContactSubmission>({
     name: '',
     email: '',
     message: '',
+    honeypot: ''
   });
+
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,12 +23,28 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase.from('contact_submissions').insert([formData]);
+      if (formData.honeypot) {
+        // This is a bot! Don't submit
+        return;
+      }
+
+      // Execute reCAPTCHA
+      if (!executeRecaptcha) {
+        setErrorMessage('reCAPTCHA not loaded. Please try again.');
+        setStatus('error');
+        return;
+      }
+
+      const { error } = await supabase.from('contact_submissions').insert([{
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }]);
 
       if (error) throw error;
 
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', honeypot: '' });
 
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
@@ -49,6 +70,15 @@ export const Contact = () => {
           {/* Contact Form */}
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="text"
+                name="honeypot"
+                value={formData.honeypot}
+                onChange={handleInputChange}
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
               <div>
                 <label 
                   htmlFor="name" 
