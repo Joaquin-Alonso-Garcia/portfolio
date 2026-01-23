@@ -17,12 +17,12 @@ export const About = () => {
           </p>
 
           <p className="text-lg leading-relaxed mb-6">
-            I’m a very outgoing and easy-going person. When I’m not coding, you’ll probably find me exploring nature with friends, going for long (or short) walks, or eating… a lot 😄
-            Asian food is definitely my favorite.
+            I’m a very outgoing and easy-going person. When I’m not coding, you’ll probably find me exploring nature with friends, going for long (or short) walks, or eating… a lot
+            Asian food is definitely my favorite. 🌿🍜
 
-            I love music and dancing — even if I’m not the best dancer, I enjoy it like crazy. Concerts, raves, and long music sets on YouTube are my thing. I listen to all kinds of genres, and every week or two I discover a new artist or set that I can’t stop replaying.
+            I love music and dancing — even if I’m not the best dancer, I enjoy it like crazy. Concerts, raves, and long music sets on YouTube are my thing. I listen to all kinds of genres, and every week or two I discover a new artist or set that I can’t stop replaying. 🎶🕺
 
-            Most of all, I love spending time with friends: sunny days, BBQs, a few beers, and long conversations about life. Simple moments, good vibes.
+            Most of all, I love spending time with friends: sunny days, BBQs, a few beers, and long conversations about life. Simple moments, good vibes. 🍻🔥
           </p>
         </div>
       </div>
