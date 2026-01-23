@@ -26,7 +26,7 @@ export const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm dark:bg-zinc-900/80' : 'bg-transparent'}`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-xl font-bold tracking-tighter">Portfolio.</a>
+        <a href="#" className="text-xl font-bold tracking-tighter">Joaquin.</a>
 
         <nav className="hidden md:flex gap-8">
           {navLinks.map((link) => (
