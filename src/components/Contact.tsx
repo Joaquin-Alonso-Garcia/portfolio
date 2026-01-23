@@ -186,10 +186,10 @@ export const Contact = () => {
                   Or email me directly at:
                 </p>
                 <a 
-                  href="mailto:joaco.alonso.garcia@gmail.com"
+                  href="mailto:joaquin.job.tools@gmail.com"
                   className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
-                  joaco.alonso.garcia@gmail.com
+                  joaquin.job.tools@gmail.com
                 </a>
               </div>
             </div>

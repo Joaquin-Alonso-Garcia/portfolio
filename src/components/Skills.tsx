@@ -63,39 +63,54 @@ export const Skills = () => {
 
   return (
     <section id="skills" className="py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12">Skills</h2>
-
-        <div className="space-y-12">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold mb-12 text-center">Skills & Expertise</h2>
+        <div className="space-y-10">
           {Object.entries(groupedSkills).map(([category, categorySkills]) => (
             <div key={category}>
-              <h3 className="text-2xl font-semibold mb-6 capitalize">{category}</h3>
+              <h3 className="text-xl font-semibold mb-4 capitalize text-gray-700 dark:text-gray-300">
+                {category}
+              </h3>
               
-              <div className="space-y-4">
+              {/* Badge Grid */}
+              <div className="flex flex-wrap gap-4">
                 {categorySkills.map((skill) => (
-                  <div key={skill.id} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        {skill.icon_url && (
-                          <img 
-                            src={skill.icon_url} 
-                            alt={skill.name}
-                            className="w-6 h-6 object-contain"
-                          />
-                        )}
-                        <span className="font-medium">{skill.name}</span>
-                      </div>
-
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {getProficiencyLabel(skill.proficiency_level)}
+                  <div
+                    key={skill.id}
+                    className="group relative bg-white dark:bg-zinc-900 rounded-lg border border-gray-200 dark:border-zinc-700 px-4 py-3 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300"
+                  >
+                    {/* Skill Badge Content */}
+                    <div className="flex items-center gap-3">
+                      {/* Icon */}
+                      {skill.icon_url && (
+                        <img 
+                          src={skill.icon_url} 
+                          alt={skill.name}
+                          className="w-6 h-6 object-contain"
+                        />
+                      )}
+                      
+                      {/* Skill Name */}
+                      <span className="font-medium text-sm whitespace-nowrap">
+                        {skill.name}
                       </span>
                     </div>
-                    {/* Proficiency Bar */}
-                    <div className="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2">
-                      <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${(skill.proficiency_level / 5) * 100}%` }}
-                      />
+                    {/* Proficiency Bubbles */}
+                    <div className="flex gap-1 mt-2 justify-center">
+                      {[1, 2, 3, 4, 5].map((level) => (
+                        <div
+                          key={level}
+                          className={`w-2 h-2 rounded-full transition-colors ${
+                            level <= skill.proficiency_level
+                              ? 'bg-blue-600'
+                              : 'bg-gray-300 dark:bg-zinc-700'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    {/* Tooltip on hover (optional) */}
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                      {getProficiencyLabel(skill.proficiency_level)}
                     </div>
                   </div>
                 ))}
